@@ -1,4 +1,5 @@
 import express from "express";
+import { checkAutorization, checkOwner } from "../Middleware/TokenVerification.js";
 import {
   AjouterUser,
   SuprimerUser,
@@ -13,15 +14,15 @@ const app = express.Router();
 app.post("/", AjouterUser);
 
 
-app.delete("/:id", SuprimerUser);
+app.delete("/:id", checkAutorization,checkOwner, SuprimerUser);
 
 
-app.put("/:id", ModifierUser);
+app.put("/:id",  checkAutorization,checkOwner, ModifierUser);
 
 
-app.get("/", AfficherAllUsers);
+app.get("/", checkAutorization, AfficherAllUsers);
 
 
-app.get("/:id", AfficherUser);
+app.get("/:id", checkAutorization, AfficherUser);
 
 export default app;

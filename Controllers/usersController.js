@@ -1,4 +1,4 @@
-
+import { CreationToken,  cleSecrete } from '../utiilityFuncions.js';
 import User from '../Models/userModel.js';
 
 
@@ -65,6 +65,42 @@ export async function ModifierUser (req, res) {
 
 
 
+}
+
+export async function VerificstionUser(req, res) {
+  let { password, userName, email } = req.body;
+
+ 
+  let clesFiltrer;
+
+  if (email) {
+    clesFiltrer = { email: email };
+  }  else {
+    clesFiltrer = { userName: userName };
+  } 
+
+
+  
+  let userViser = await User.findOne(clesFiltrer);
+
+ 
+  if (!userViser) {
+    return res.status(404).send("Utilisateur non trouve");
+  }
+
+
+  if (userViser.password !== password) {
+    return res.status(401).send("Mot de passe incorrect");
+  } 
+  const payload = userViser.id
+
+
+    let authorization = await CreationToken(payload,  cleSecrete) 
+
+    res.setHeader('Authorization', authorization);
+
+
+    
 }
 
 
