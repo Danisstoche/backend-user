@@ -92,12 +92,13 @@ export async function VerificstionUser(req, res) {
   if (userViser.password !== password) {
     return res.status(401).send("Mot de passe incorrect");
   } 
-  const payload = userViser.id
+  const payload = { id: userViser.id }
 
 
     let authorization = await CreationToken(payload,  cleSecrete) 
 
     res.setHeader('Authorization', authorization);
+    res.status(200).json({ message: "Connexion réussie", token: authorization });
 
 
     

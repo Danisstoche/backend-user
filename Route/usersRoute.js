@@ -5,7 +5,8 @@ import {
   SuprimerUser,
   ModifierUser,
   AfficherAllUsers,
-  AfficherUser
+  AfficherUser,
+  VerificstionUser
 } from "../Controllers/usersController.js";
 
 const app = express.Router();
@@ -13,6 +14,7 @@ const app = express.Router();
 
 app.post("/", AjouterUser);
 
+app.post("/login", VerificstionUser);
 
 app.delete("/:id", checkAutorization,checkOwner, SuprimerUser);
 

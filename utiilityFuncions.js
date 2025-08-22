@@ -1,8 +1,7 @@
 import jwt from 'jsonwebtoken'; 
 
 
-const cleSecrete = "yoyoyo"; 
-let payload;
+export const cleSecrete = "yoyoyo"; 
 
 export async function CreationToken(payload, cleScrete) {
   
@@ -13,5 +12,9 @@ export async function CreationToken(payload, cleScrete) {
 
 
 export const lireToken = (token) => {
+  try {
     return jwt.verify(token, cleSecrete);
+  } catch (err) {
+    return false;
+  }
 };

@@ -11,7 +11,7 @@ import { lireToken } from "../utiilityFuncions.js";
             return res.status(401).json("autorization manquante" );
         }
 
-        decodedToken = lireToken(authorization)
+        let decodedToken = lireToken(authorization)
         
         if (decodedToken == false ) {
             return res.send("autorization invalide")
